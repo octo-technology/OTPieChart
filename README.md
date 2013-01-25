@@ -8,7 +8,7 @@ Dream is over. We made it with love, just for you !
 
 We made a demo project, feel free to test it.
 
-![Why OTPieChart](./images/why.png)
+![Why OTPieChart](https://raw.github.com/octo-online/OTPieChart/master/images/why.png)
 
 
 How to get it on your project ?
@@ -23,11 +23,11 @@ It's really simple :
 * __Add__ the files in Xcode
 * __Add__ QuartzCore framework to your project (Build phases of your target) like the following :
 
-![Add QuartzCore step 1](./images/QuartzCore1.png)
+![Add QuartzCore step 1](https://raw.github.com/octo-online/OTPieChart/master/images/QuartzCore1.png)
 
 And then :
 
-![Add QuartzCore step 2](./images/QuartzCore2.png)
+![Add QuartzCore step 2](https://raw.github.com/octo-online/OTPieChart/master/images/QuartzCore2.png)
 
 
 Now your project should build correctly.
