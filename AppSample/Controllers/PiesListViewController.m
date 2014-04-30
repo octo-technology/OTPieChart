@@ -27,11 +27,9 @@
 /**************************************************************************************************/
 #pragma mark - Birth
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
+- (id)initWithStyle:(UITableViewStyle)style {
 	self = [super initWithStyle:style];
-	if (self)
-	{
+	if (self) {
 		// Custom initialization
 	}
 	return self;
@@ -46,58 +44,58 @@
 /**************************************************************************************************/
 #pragma mark - Table view data source
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-	return 8;
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+	return 9;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	static NSString *CellIdentifier = @"basicCell";
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 
-	if (cell == nil)
-	{
+	if (cell == nil) {
 		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
 	}
 
 	NSString *text = nil;
 
-	switch (indexPath.row)
-	{
-		case 0 :
+	switch (indexPath.row) {
+		case 0:
 			text = @"Simple Pie";
 			break;
 
-		case 1 :
+		case 1:
 			text = @"No inner radius (aka Classic Pie)";
 			break;
 
-		case 2 :
+		case 2:
 			text = @"Big inner radius (aka the Donut)";
 			break;
 
-		case 3 :
+		case 3:
 			text = @"Wide separation between slices";
 			break;
 
-		case 4 :
+		case 4:
 			text = @"No separation between slices";
 			break;
 
-		case 5 :
+		case 5:
 			text = @"Collision between legend labels";
 			break;
 
-		case 6 :
+		case 6:
 			text = @"Legend in slice";
 			break;
 
-        case 7 :
+		case 7:
 			text = @"Custom text color in label";
 			break;
 
-		default :
+		case 8:
+			text = @"Custom view in label";
+			break;
+
+		default:
 			break;
 	}
 
@@ -111,8 +109,7 @@
 /**************************************************************************************************/
 #pragma mark - Table view delegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	[self.delegate didSelectPieAtindex:indexPath.row];
 
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];

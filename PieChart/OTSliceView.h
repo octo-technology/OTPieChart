@@ -37,7 +37,7 @@
 /** @name UI Properties */
 
 /** Title dislpayed along with the slice. */
-@property (nonatomic, strong) UILabel *titleLabel;
+@property (nonatomic, strong) UIView *titleView;
 
 // Data
 /** @name Data Properties */
@@ -65,7 +65,7 @@
 /** Switch legend display in or out the slice. */
 @property (nonatomic, assign) BOOL shouldDisplayLegendInsideSlice;
 /** Return the states of conflict between the title and the label. */
-@property (nonatomic, assign) BOOL titleLabelIsInConflict;
+@property (nonatomic, assign) BOOL titleViewIsInConflict;
 
 /**************************************************************************/
 #pragma mark - manage animation pie chart
@@ -91,7 +91,7 @@
 
 /**
  * @param offset
- * @return 
+ * @return
  */
 - (CGPoint)computeTopOfSliceDotWithOffset:(CGFloat)offset;
 /**

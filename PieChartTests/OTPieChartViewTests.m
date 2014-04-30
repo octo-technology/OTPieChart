@@ -26,8 +26,8 @@
 
 - (void)addLegendsToView;
 
-+ (BOOL)label:(UILabel *)firstLabel isInCollisionWithLabel:(UILabel *)secondLabel;
-- (BOOL)isInCollisionWithLabel:(UILabel *)label;
++ (BOOL)view:(UIView *)firstView isInCollisionWithView:(UIView *)secondView;
+- (BOOL)isInCollisionWithView:(UILabel *)view;
 
 @end
 
@@ -55,23 +55,23 @@
 	[self.superView addSubview:self.pieChart];
 	self.slice1 = [[OTSliceView alloc] init];
 	UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
-	self.slice1.titleLabel = label;
+	self.slice1.titleView = label;
 	self.slice1.sliceAngle = 10;
 
 	self.slice2 = [[OTSliceView alloc] init];
-	self.slice2.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 20, 20, 20)];
+	self.slice2.titleView = [[UILabel alloc] initWithFrame:CGRectMake(20, 20, 20, 20)];
 	self.slice2.sliceAngle = 20;
 
 	self.slice3 = [[OTSliceView alloc] init];
-	self.slice3.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(40, 20, 20, 20)];
+	self.slice3.titleView = [[UILabel alloc] initWithFrame:CGRectMake(40, 20, 20, 20)];
 	self.slice3.sliceAngle = 23;
 
 	self.slice4 = [[OTSliceView alloc] init];
-	self.slice4.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 40, 20, 20)];
+	self.slice4.titleView = [[UILabel alloc] initWithFrame:CGRectMake(20, 40, 20, 20)];
 	self.slice4.sliceAngle = 26;
 
 	self.conflictSliceWith4 = [[OTSliceView alloc] init];
-	self.conflictSliceWith4.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(19, 19, 20, 20)];
+	self.conflictSliceWith4.titleView = [[UILabel alloc] initWithFrame:CGRectMake(19, 19, 20, 20)];
 	self.conflictSliceWith4.sliceAngle = 30;
 
 
@@ -142,8 +142,8 @@
 	[self.pieChart addLegendsToView];
 
 	// THEN
-	XCTAssertTrue([self.slice1.titleLabel isDescendantOfView:self.pieChart]);
-	XCTAssertTrue([self.slice2.titleLabel isDescendantOfView:self.pieChart]);
+	XCTAssertTrue([self.slice1.titleView isDescendantOfView:self.pieChart]);
+	XCTAssertTrue([self.slice2.titleView isDescendantOfView:self.pieChart]);
 }
 
 - (void)testAddLegendToView_with_twoViews_Colision_return_one_View {
@@ -155,8 +155,8 @@
 	[self.pieChart addLegendsToView];
 
 	// THEN
-	XCTAssertFalse([self.slice1.titleLabel isDescendantOfView:self.pieChart]);
-	XCTAssertTrue([self.conflictSliceWith4.titleLabel isDescendantOfView:self.pieChart]);
+	XCTAssertFalse([self.slice1.titleView isDescendantOfView:self.pieChart]);
+	XCTAssertTrue([self.conflictSliceWith4.titleView isDescendantOfView:self.pieChart]);
 }
 
 - (void)testAddLegendToView_with_threeViews_In_Colision_return_one_View {
@@ -167,9 +167,9 @@
 	[self.pieChart addLegendsToView];
 
 	// THEN
-	XCTAssertFalse([self.slice1.titleLabel isDescendantOfView:self.pieChart]);
-	XCTAssertFalse([self.slice2.titleLabel isDescendantOfView:self.pieChart]);
-	XCTAssertTrue([self.conflictSliceWith4.titleLabel isDescendantOfView:self.pieChart]);
+	XCTAssertFalse([self.slice1.titleView isDescendantOfView:self.pieChart]);
+	XCTAssertFalse([self.slice2.titleView isDescendantOfView:self.pieChart]);
+	XCTAssertTrue([self.conflictSliceWith4.titleView isDescendantOfView:self.pieChart]);
 }
 
 - (void)testAddLegendToView_with_5_Views_In_Colision_return_3_View {
@@ -180,11 +180,11 @@
 	[self.pieChart addLegendsToView];
 
 	// THEN
-	XCTAssertFalse([self.slice1.titleLabel isDescendantOfView:self.pieChart]);
-	XCTAssertFalse([self.slice2.titleLabel isDescendantOfView:self.pieChart]);
-	XCTAssertTrue([self.conflictSliceWith4.titleLabel isDescendantOfView:self.pieChart]);
-	XCTAssertTrue([self.slice3.titleLabel isDescendantOfView:self.pieChart]);
-	XCTAssertTrue([self.slice4.titleLabel isDescendantOfView:self.pieChart]);
+	XCTAssertFalse([self.slice1.titleView isDescendantOfView:self.pieChart]);
+	XCTAssertFalse([self.slice2.titleView isDescendantOfView:self.pieChart]);
+	XCTAssertTrue([self.conflictSliceWith4.titleView isDescendantOfView:self.pieChart]);
+	XCTAssertTrue([self.slice3.titleView isDescendantOfView:self.pieChart]);
+	XCTAssertTrue([self.slice4.titleView isDescendantOfView:self.pieChart]);
 }
 
 - (void)testAddLegendToView_with_4_Views_In_Colision_return_3_View {
@@ -195,10 +195,10 @@
 	[self.pieChart addLegendsToView];
 
 	// THEN
-	XCTAssertFalse([self.slice2.titleLabel isDescendantOfView:self.pieChart]);
-	XCTAssertTrue([self.conflictSliceWith4.titleLabel isDescendantOfView:self.pieChart]);
-	XCTAssertTrue([self.slice3.titleLabel isDescendantOfView:self.pieChart]);
-	XCTAssertTrue([self.slice4.titleLabel isDescendantOfView:self.pieChart]);
+	XCTAssertFalse([self.slice2.titleView isDescendantOfView:self.pieChart]);
+	XCTAssertTrue([self.conflictSliceWith4.titleView isDescendantOfView:self.pieChart]);
+	XCTAssertTrue([self.slice3.titleView isDescendantOfView:self.pieChart]);
+	XCTAssertTrue([self.slice4.titleView isDescendantOfView:self.pieChart]);
 }
 
 /**************************************************************************************************/
@@ -207,7 +207,7 @@
 - (void)testLabelisInCollisionWithLabelWithNilAndNIlReturnNo {
 	BOOL isInCollision = NO;
 	// WHEN
-	isInCollision = [OTPieChartView label:nil isInCollisionWithLabel:nil];
+	isInCollision = [OTPieChartView view:nil isInCollisionWithView:nil];
 
 	// THEN
 	XCTAssertFalse(isInCollision);
@@ -218,8 +218,8 @@
 	UILabel *firstLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
 	UILabel *secondLabel = nil;
 
-	BOOL isInCollision = [OTPieChartView label:firstLabel
-	                                                 isInCollisionWithLabel:secondLabel];
+	BOOL isInCollision = [OTPieChartView view:firstLabel
+	                                                 isInCollisionWithView:secondLabel];
 
 	// THEN
 	XCTAssertFalse(isInCollision);
@@ -229,8 +229,8 @@
 	// WHEN
 	UILabel *firstLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
 	UILabel *secondLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
-	BOOL isInCollision = [OTPieChartView label:firstLabel
-	                                                 isInCollisionWithLabel:secondLabel];
+	BOOL isInCollision = [OTPieChartView view:firstLabel
+	                                                 isInCollisionWithView:secondLabel];
 
 	// THEN
 	XCTAssertFalse(isInCollision);
@@ -240,8 +240,8 @@
 	// WHEN
 	UILabel *firstLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
 	UILabel *secondLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 20, 20, 20)];
-	BOOL isInCollision = [OTPieChartView label:firstLabel
-	                                                 isInCollisionWithLabel:secondLabel];
+	BOOL isInCollision = [OTPieChartView view:firstLabel
+	                                                 isInCollisionWithView:secondLabel];
 
 	// THEN
 	XCTAssertFalse(isInCollision);
@@ -251,8 +251,8 @@
 	// WHEN
 	UILabel *firstLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
 	UILabel *secondLabel = [[UILabel alloc] initWithFrame:CGRectMake(19, 19, 20, 20)];
-	BOOL isInCollision = [OTPieChartView label:firstLabel
-	                                                 isInCollisionWithLabel:secondLabel];
+	BOOL isInCollision = [OTPieChartView view:firstLabel
+	                                                 isInCollisionWithView:secondLabel];
 
 	// THEN
 	XCTAssertTrue(isInCollision);
@@ -267,7 +267,7 @@
 	[self.pieChart addSubview:label];
 
 	// WHEN
-	BOOL result = [self.pieChart isInCollisionWithLabel:label];
+	BOOL result = [self.pieChart isInCollisionWithView:label];
 
 	// THEN
 	XCTAssertFalse(result);
@@ -279,7 +279,7 @@
 	[self.pieChart addSubview:label];
 
 	// WHEN
-	BOOL result = [self.pieChart isInCollisionWithLabel:label];
+	BOOL result = [self.pieChart isInCollisionWithView:label];
 
 	// THEN
 	XCTAssertFalse(result);
@@ -291,7 +291,7 @@
 	[self.pieChart addSubview:label];
 
 	// WHEN
-	BOOL result = [self.pieChart isInCollisionWithLabel:label];
+	BOOL result = [self.pieChart isInCollisionWithView:label];
 
 	// THEN
 	XCTAssertTrue(result);
@@ -304,7 +304,7 @@
 
 
 	// WHEN
-	BOOL result = [self.pieChart isInCollisionWithLabel:label];
+	BOOL result = [self.pieChart isInCollisionWithView:label];
 
 	// THEN
 	XCTAssertFalse(result);
@@ -316,7 +316,7 @@
 	[self.pieChart addSubview:label];
 
 	// WHEN
-	BOOL result = [self.pieChart isInCollisionWithLabel:label];
+	BOOL result = [self.pieChart isInCollisionWithView:label];
 
 	// THEN
 	XCTAssertTrue(result);
@@ -328,7 +328,7 @@
 	[self.pieChart addSubview:label];
 
 	// WHEN
-	BOOL result = [self.pieChart isInCollisionWithLabel:label];
+	BOOL result = [self.pieChart isInCollisionWithView:label];
 
 	// THEN
 	XCTAssertFalse(result);
@@ -341,7 +341,7 @@
 	[self.pieChart setFrame:CGRectMake(20, 20, 400, 400)];
 
 	// WHEN
-	BOOL result = [self.pieChart isInCollisionWithLabel:label];
+	BOOL result = [self.pieChart isInCollisionWithView:label];
 
 	// THEN
 	XCTAssertFalse(result);
@@ -354,7 +354,7 @@
 	[self.pieChart setFrame:CGRectMake(20, 20, 400, 400)];
 
 	// WHEN
-	BOOL result = [self.pieChart isInCollisionWithLabel:label];
+	BOOL result = [self.pieChart isInCollisionWithView:label];
 
 	// THEN
 	XCTAssertFalse(result);
@@ -367,7 +367,7 @@
 	[self.pieChart setFrame:CGRectMake(20, 20, 400, 400)];
 
 	// WHEN
-	BOOL result = [self.pieChart isInCollisionWithLabel:label];
+	BOOL result = [self.pieChart isInCollisionWithView:label];
 
 	// THEN
 	XCTAssertFalse(result);
@@ -379,7 +379,7 @@
 	[self.pieChart setFrame:CGRectMake(20, 20, 400, 400)];
 
 	// WHEN
-	BOOL result = [self.pieChart isInCollisionWithLabel:label];
+	BOOL result = [self.pieChart isInCollisionWithView:label];
 
 	// THEN
 	XCTAssertFalse(result);
@@ -392,7 +392,7 @@
 	[self.pieChart setFrame:CGRectMake(20, 20, 400, 400)];
 
 	// WHEN
-	BOOL result = [self.pieChart isInCollisionWithLabel:label];
+	BOOL result = [self.pieChart isInCollisionWithView:label];
 
 	// THEN
 	XCTAssertTrue(result);
@@ -406,7 +406,7 @@
 
 
 	// WHEN
-	BOOL result = [self.pieChart isInCollisionWithLabel:label];
+	BOOL result = [self.pieChart isInCollisionWithView:label];
 
 	// THEN
 	XCTAssertFalse(result);
@@ -419,7 +419,7 @@
 	[self.pieChart setFrame:CGRectMake(20, 20, 400, 400)];
 
 	// WHEN
-	BOOL result = [self.pieChart isInCollisionWithLabel:label];
+	BOOL result = [self.pieChart isInCollisionWithView:label];
 
 	// THEN
 	XCTAssertTrue(result);

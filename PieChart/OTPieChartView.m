@@ -32,7 +32,7 @@
 
 #define LEGEND_OFFSET                  15
 
-#define SHOULD_DRAW_GRADIENT_ON_SLICES YES
+#define SHOULD_DRAW_GRADIENT_ON_SLICES NO
 
 @interface OTPieChartView ()
 
@@ -41,7 +41,7 @@
 // Legends
 - (CGRect)computeLegendSizeForSlice:(OTSliceView *)sliceView;
 - (void)addLegendForSlice:(OTSliceView *)slice withFrame:(CGRect)frame;
-- (UILabel *)legendLabelForFrame:(CGRect)frame andText:(NSString *)text;
+- (UIView *)legendLabelForFrame:(CGRect)frame andText:(NSString *)text;
 - (void)addLegendsToView;
 
 // Collision
@@ -49,8 +49,8 @@
 - (void)removeOneLabel;
 - (void)addAllRemainingLabels;
 - (void)adjustLabelsSizeOfOverFill;
-+ (BOOL)label:(UILabel *)firstLabel isInCollisionWithLabel:(UILabel *)secondLabel;
-- (BOOL)isInCollisionWithLabel:(UILabel *)label;
++ (BOOL)view:(UIView *)firstView isInCollisionWithView:(UIView *)secondView;
+- (BOOL)isInCollisionWithView:(UIView *)view;
 
 // label tapped
 - (void)labelTapped:(id)sender;
@@ -148,6 +148,10 @@
 			sliceLayer.title = [self.datasource pieChart:self getSliceLabel:i];
 		}
 
+		if ([self.datasource respondsToSelector:@selector(pieChart:getView:)]) {
+			sliceLayer.titleView = [self.datasource pieChart:self getView:i];
+		}
+
 		[self.layer addSublayer:sliceLayer];
 		[self.sliceLayerList addObject:sliceLayer];
 		[sliceLayer setNeedsDisplay];
@@ -193,22 +197,44 @@
  * This method add legend for slice.
  */
 - (void)addLegendForSlice:(OTSliceView *)slice withFrame:(CGRect)frame {
-	UILabel *legendLabel = [self legendLabelForFrame:frame andText:slice.title];
+	if (slice.titleView) {
+		slice.titleView.frame = frame;
+		[slice.titleView sizeToFit];
 
-	[legendLabel sizeToFit];
+		CGRect viewFrame = [self computeLegendOriginForSlice:slice legendFrame:slice.titleView.frame];
+		slice.titleView.frame = viewFrame;
 
-	CGRect labelFrame = [self computeLegendOriginForSlice:slice legendFrame:legendLabel.frame];
-	legendLabel.frame = labelFrame;
+		NSUInteger index = [self.sliceLayerList indexOfObject:slice];
+		slice.titleView.tag = index;
+
+		// Add gesture
+		slice.titleView.userInteractionEnabled = YES;
+		UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(labelTapped:)];
+		[slice.titleView addGestureRecognizer:tap];
+
+		return;
+	}
+
+	UIView *legendView = [self legendLabelForFrame:frame andText:slice.title];
+
+	[legendView sizeToFit];
+
+	CGRect viewFrame = [self computeLegendOriginForSlice:slice legendFrame:legendView.frame];
+	legendView.frame = viewFrame;
 
 	NSUInteger index = [self.sliceLayerList indexOfObject:slice];
-	legendLabel.tag = index;
+	legendView.tag = index;
 
 	// Add gesture
-	legendLabel.userInteractionEnabled = YES;
+	legendView.userInteractionEnabled = YES;
 	UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(labelTapped:)];
-	[legendLabel addGestureRecognizer:tap];
+	[legendView addGestureRecognizer:tap];
 
-	slice.titleLabel = legendLabel;
+	UIView *view = [[UIView alloc] initWithFrame:legendView.frame];
+	legendView.frame = CGRectMake(0, 0, legendView.frame.size.width, legendView.frame.size.height);
+	[view addSubview:legendView];
+
+	slice.titleView = view;
 }
 
 /**
@@ -265,7 +291,7 @@
 /**
  * The method create a legend label and return it.
  */
-- (UILabel *)legendLabelForFrame:(CGRect)frame andText:(NSString *)text {
+- (UIView *)legendLabelForFrame:(CGRect)frame andText:(NSString *)text {
 	UILabel *label = [[UILabel alloc] initWithFrame:frame];
 
 	UIFont *font = [UIFont defaultFont];
@@ -287,7 +313,11 @@
 	[label setBackgroundColor:[UIColor clearColor]];
 	[label setText:text];
 
-	return label;
+	UIView *view = [[UIView alloc] initWithFrame:label.frame];
+	label.frame = CGRectMake(0, 0, label.frame.size.width, label.frame.size.height);
+	[view addSubview:label];
+
+	return view;
 }
 
 /**
@@ -306,7 +336,7 @@
 		// check for collision
 		for (NSUInteger i = 0; i < self.sliceLayerList.count; i++) {
 			OTSliceView *slice1 = [self.sliceLayerList objectAtIndex:i];
-			UILabel *firstLabel = slice1.titleLabel;
+			UIView *firstView = slice1.titleView;
 
 			for (NSUInteger j = 0; j < self.sliceLayerList.count; j++) {
 				if (i == j) {
@@ -314,14 +344,14 @@
 				}
 
 				OTSliceView *slice2 = [self.sliceLayerList objectAtIndex:j];
-				UILabel *secondLabel = slice2.titleLabel;
+				UIView *secondView = slice2.titleView;
 
 				// If there is a collision, we marked the slice as 'in conflict'
-				if (firstLabel
-				    && secondLabel
-				    && firstLabel != secondLabel
-				    && [OTPieChartView label:firstLabel isInCollisionWithLabel:secondLabel]) {
-					slice1.titleLabelIsInConflict = YES;
+				if (firstView
+				    && secondView
+				    && firstView != secondView
+				    && [OTPieChartView view:firstView isInCollisionWithView:secondView]) {
+					slice1.titleViewIsInConflict = YES;
 					noMoreCollision = NO;
 					break;
 				}
@@ -344,7 +374,7 @@
  */
 - (void)resetCollision {
 	for (OTSliceView *slice in self.sliceLayerList) {
-		slice.titleLabelIsInConflict = NO;
+		slice.titleViewIsInConflict = NO;
 	}
 }
 
@@ -354,7 +384,7 @@
 - (void)removeOneLabel {
 	OTSliceView *slice = [OTSliceView retrieveSliceViewWithSmallestSliceAngleFromList:self.sliceLayerList];
 
-	slice.titleLabel = nil;
+	slice.titleView = nil;
 }
 
 /**
@@ -362,7 +392,7 @@
  */
 - (void)addAllRemainingLabels {
 	for (OTSliceView *slice in self.sliceLayerList) {
-		[self addSubview:slice.titleLabel];
+		[self addSubview:slice.titleView];
 	}
 }
 
@@ -372,12 +402,12 @@
  */
 - (void)adjustLabelsSizeOfOverFill {
 	for (OTSliceView *slice in self.sliceLayerList) {
-		if ([self isInCollisionWithLabel:slice.titleLabel]) {
-			CGRect labelFrame = [self convertRect:slice.titleLabel.frame toView:self.superview];
+		if ([self isInCollisionWithView:slice.titleView]) {
+			CGRect labelFrame = [self convertRect:slice.titleView.frame toView:self.superview];
 			CGRect newFrame = CGRectIntersection(labelFrame, self.frame);
 			newFrame = [self convertRect:newFrame fromView:self.superview];
 
-			[slice.titleLabel setFrame:newFrame];
+			[slice.titleView setFrame:newFrame];
 		}
 	}
 }
@@ -449,25 +479,25 @@
 /**************************************************************************************************/
 #pragma mark - Collision
 
-+ (BOOL)label:(UILabel *)firstLabel isInCollisionWithLabel:(UILabel *)secondLabel {
-	if (firstLabel == nil || secondLabel == nil) {
++ (BOOL)view:(UIView *)firstView isInCollisionWithView:(UIView *)secondView {
+	if (firstView == nil || secondView == nil) {
 		return NO;
 	}
-	else if (CGRectEqualToRect(firstLabel.frame, CGRectZero) && CGRectEqualToRect(secondLabel.frame, CGRectZero)) {
+	else if (CGRectEqualToRect(firstView.frame, CGRectZero) && CGRectEqualToRect(secondView.frame, CGRectZero)) {
 		return NO;
 	}
 
-	return CGRectIntersectsRect(firstLabel.frame, secondLabel.frame);
+	return CGRectIntersectsRect(firstView.frame, secondView.frame);
 }
 
 /**
  * This method determine if a Label frame goes outside of the pie chart frame
  */
-- (BOOL)isInCollisionWithLabel:(UILabel *)label {
-	CGRect labelFrame = [self convertRect:label.frame toView:self.superview];
+- (BOOL)isInCollisionWithView:(UIView *)view {
+	CGRect viewFrame = [self convertRect:view.frame toView:self.superview];
 
-	return !CGRectContainsRect(self.frame, labelFrame) &&
-	       CGRectIntersectsRect(self.frame, labelFrame);
+	return !CGRectContainsRect(self.frame, viewFrame) &&
+	       CGRectIntersectsRect(self.frame, viewFrame);
 }
 
 /**************************************************************************************************/

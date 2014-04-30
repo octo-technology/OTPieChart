@@ -51,25 +51,25 @@
 
 
 	self.slice1 = [[OTSliceView alloc] init];
-	self.slice1.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
+	self.slice1.titleView = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
 	self.slice1.sliceAngle = 10;
 
 	self.slice2 = [[OTSliceView alloc] init];
-	self.slice2.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 20, 20, 20)];
+	self.slice2.titleView = [[UILabel alloc] initWithFrame:CGRectMake(20, 20, 20, 20)];
 	self.slice2.sliceAngle = 20;
 
 	self.slice3 = [[OTSliceView alloc] init];
-	self.slice3.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(40, 20, 20, 20)];
+	self.slice3.titleView = [[UILabel alloc] initWithFrame:CGRectMake(40, 20, 20, 20)];
 	self.slice3.sliceAngle = 23;
 
 	self.slice4 = [[OTSliceView alloc] init];
-	self.slice4.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 40, 20, 20)];
+	self.slice4.titleView = [[UILabel alloc] initWithFrame:CGRectMake(20, 40, 20, 20)];
 	self.slice4.sliceAngle = 26;
 
 
 
 	self.conflictSliceWith4 = [[OTSliceView alloc] init];
-	self.conflictSliceWith4.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(19, 19, 20, 20)];
+	self.conflictSliceWith4.titleView = [[UILabel alloc] initWithFrame:CGRectMake(19, 19, 20, 20)];
 	self.conflictSliceWith4.sliceAngle = 30;
 }
 
