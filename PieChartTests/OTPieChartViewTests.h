@@ -20,19 +20,19 @@
  * Test the OTPieChartView class
  */
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 
 #import "OTPieChartView.h"
 
-@interface OTPieChartViewTests : SenTestCase
+@interface OTPieChartViewTests : XCTestCase
 
-@property (nonatomic, strong) OTPieChartView    *pieChart;
+@property (nonatomic, strong) OTPieChartView *pieChart;
 
-@property (nonatomic, strong) UIView            *superView;
-@property (nonatomic, strong) OTSliceView       *slice1;
-@property (nonatomic, strong) OTSliceView       *slice2;
-@property (nonatomic, strong) OTSliceView       *slice3;
-@property (nonatomic, strong) OTSliceView       *slice4;
-@property (nonatomic, strong) OTSliceView       *conflictSliceWith4;
+@property (nonatomic, strong) UIView *superView;
+@property (nonatomic, strong) OTSliceView *slice1;
+@property (nonatomic, strong) OTSliceView *slice2;
+@property (nonatomic, strong) OTSliceView *slice3;
+@property (nonatomic, strong) OTSliceView *slice4;
+@property (nonatomic, strong) OTSliceView *conflictSliceWith4;
 
 @end

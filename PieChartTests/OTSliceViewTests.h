@@ -20,17 +20,17 @@
  * KBOTSliceViewTests class
  */
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 
 #import "OTSliceView.h"
 
-@interface OTSliceViewTests : SenTestCase
+@interface OTSliceViewTests : XCTestCase
 
-@property (nonatomic, strong) OTSliceView       *slice1;
-@property (nonatomic, strong) OTSliceView       *slice2;
-@property (nonatomic, strong) OTSliceView       *slice3;
-@property (nonatomic, strong) OTSliceView       *slice4;
-@property (nonatomic, strong) OTSliceView       *conflictSliceWith4;
+@property (nonatomic, strong) OTSliceView *slice1;
+@property (nonatomic, strong) OTSliceView *slice2;
+@property (nonatomic, strong) OTSliceView *slice3;
+@property (nonatomic, strong) OTSliceView *slice4;
+@property (nonatomic, strong) OTSliceView *conflictSliceWith4;
 
 
 @end
