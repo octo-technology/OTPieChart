@@ -56,7 +56,7 @@
  * @param color Color of the slice.
  */
 - (id)initWithLabel:(NSString *)label
-    percentageValue:(CGFloat)percentageValue
-              color:(UIColor *)color;
+	percentageValue:(CGFloat)percentageValue
+			  color:(UIColor *)color;
 
 @end

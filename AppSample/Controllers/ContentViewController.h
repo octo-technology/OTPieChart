@@ -23,19 +23,19 @@
 #import "OTPieChartView.h"
 
 // For creating colors with RGB values
-#define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
+#define UIColorFromRGB(rgbValue) [UIColor colorWithRed : ((float)((rgbValue & 0xFF0000) >> 16)) / 255.0 green : ((float)((rgbValue & 0xFF00) >> 8)) / 255.0 blue : ((float)(rgbValue & 0xFF)) / 255.0 alpha : 1.0]
 
 
-@interface ContentViewController : UIViewController<OTPieChartDelegate,OTPieChartDataSource>
+@interface ContentViewController : UIViewController<OTPieChartDelegate, OTPieChartDataSource>
 
 /**************************************************************************************************/
 #pragma mark - Getters & Setters
 
-@property (nonatomic, strong) NSMutableArray        *slices;
-@property (nonatomic, strong) NSArray               *colors;
-@property (nonatomic, strong) NSArray               *values;
-@property (nonatomic, strong) NSArray               *labels;
+@property (nonatomic, strong) NSMutableArray *slices;
+@property (nonatomic, strong) NSArray *colors;
+@property (nonatomic, strong) NSArray *values;
+@property (nonatomic, strong) NSArray *labels;
 
-@property (nonatomic, strong) OTPieChartView         *pie;
+@property (nonatomic, strong) OTPieChartView *pie;
 
 @end

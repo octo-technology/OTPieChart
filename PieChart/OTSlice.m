@@ -35,8 +35,8 @@
 #pragma mark - Birth
 
 - (id)initWithLabel:(NSString *)aLabel
-    percentageValue:(CGFloat)aPercentageValue
-              color:(UIColor *)aColor
+	percentageValue:(CGFloat)aPercentageValue
+			  color:(UIColor *)aColor
 {
 	if (self = [super init])
 	{

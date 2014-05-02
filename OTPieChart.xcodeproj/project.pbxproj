@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		85CB25551913C22900F8C715 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 85CB25541913C22900F8C715 /* Default-568h@2x.png */; };
+		85D02BAC1913C0C000CEF03A /* Pie9ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85D02BAB1913C0C000CEF03A /* Pie9ViewController.m */; };
 		933A9F9F166FA85C00888CFA /* Pie7ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 933A9F9E166FA85B00888CFA /* Pie7ViewController.m */; };
 		9345C913166511ED0096BDA8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93E00A21159C9489000EF021 /* CoreGraphics.framework */; };
 		9345C914166511F80096BDA8 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93897FC0159C959F009531D3 /* QuartzCore.framework */; };
@@ -50,6 +52,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		85CB25541913C22900F8C715 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		85D02BAA1913C0C000CEF03A /* Pie9ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pie9ViewController.h; sourceTree = "<group>"; };
+		85D02BAB1913C0C000CEF03A /* Pie9ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Pie9ViewController.m; sourceTree = "<group>"; };
 		933A9F9D166FA85B00888CFA /* Pie7ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pie7ViewController.h; sourceTree = "<group>"; };
 		933A9F9E166FA85B00888CFA /* Pie7ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Pie7ViewController.m; sourceTree = "<group>"; };
 		934A337D166F57B400E5E67E /* PiesListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PiesListViewController.h; sourceTree = "<group>"; };
@@ -162,6 +167,8 @@
 				933A9F9E166FA85B00888CFA /* Pie7ViewController.m */,
 				93A2C1C01670EFB800FDD230 /* Pie8ViewController.h */,
 				93A2C1C11670EFB800FDD230 /* Pie8ViewController.m */,
+				85D02BAA1913C0C000CEF03A /* Pie9ViewController.h */,
+				85D02BAB1913C0C000CEF03A /* Pie9ViewController.m */,
 			);
 			name = "Pies controllers";
 			path = PiesController;
@@ -229,6 +236,7 @@
 		93E00A24159C9489000EF021 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				85CB25541913C22900F8C715 /* Default-568h@2x.png */,
 				93E00A25159C9489000EF021 /* OTPieChart-Info.plist */,
 				93E00A26159C9489000EF021 /* InfoPlist.strings */,
 				93E00A29159C9489000EF021 /* main.m */,
@@ -303,7 +311,7 @@
 		93E00A10159C9489000EF021 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0430;
+				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "OCTO Technology";
 			};
 			buildConfigurationList = 93E00A13159C9489000EF021 /* Build configuration list for PBXProject "OTPieChart" */;
@@ -331,6 +339,7 @@
 			files = (
 				93E00A28159C9489000EF021 /* InfoPlist.strings in Resources */,
 				934A3387166F57B400E5E67E /* ContentViewController.xib in Resources */,
+				85CB25551913C22900F8C715 /* Default-568h@2x.png in Resources */,
 				93821808166F9BA700045714 /* Pie6ViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -393,6 +402,7 @@
 				93821803166F94F200045714 /* Pie5ViewController.m in Sources */,
 				93821806166F960A00045714 /* Pie6ViewController.m in Sources */,
 				933A9F9F166FA85C00888CFA /* Pie7ViewController.m in Sources */,
+				85D02BAC1913C0C000CEF03A /* Pie9ViewController.m in Sources */,
 				93A2C1BF1670E9B800FDD230 /* UIFont+OTPieChart.m in Sources */,
 				93A2C1C21670EFB900FDD230 /* Pie8ViewController.m in Sources */,
 			);
@@ -434,6 +444,12 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = NO;
@@ -446,10 +462,14 @@
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -460,15 +480,24 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";

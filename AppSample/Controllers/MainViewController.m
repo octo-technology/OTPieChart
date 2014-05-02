@@ -35,8 +35,10 @@
 
 @implementation MainViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-	if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+	if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])
+	{
 		Pie1ViewController *contentViewContoller = [[Pie1ViewController alloc] initWithNibName:nil bundle:nil];
 		PiesListViewController *tableViewController = [[PiesListViewController alloc] initWithStyle:UITableViewStylePlain];
 		tableViewController.delegate = self;
@@ -50,72 +52,75 @@
 /**************************************************************************************************/
 #pragma mark - UIViewController
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+{
 	return UIInterfaceOrientationIsLandscape(toInterfaceOrientation);
 }
 
 /**************************************************************************************************/
 #pragma mark - PiesListDelegate
 
-- (void)didSelectPieAtindex:(NSUInteger)index {
+- (void)didSelectPieAtindex:(NSUInteger)index
+{
 	ContentViewController *contentViewController = nil;
 
-	switch (index) {
-		case 0:
+	switch (index)
+	{
+		case 0 :
 		{
 			contentViewController = [[Pie1ViewController alloc] initWithNibName:nil bundle:nil];
 			break;
 		}
 
-		case 1:
+		case 1 :
 		{
 			contentViewController = [[Pie2ViewController alloc] initWithNibName:nil bundle:nil];
 			break;
 		}
 
-		case 2:
+		case 2 :
 		{
 			contentViewController = [[Pie3ViewController alloc] initWithNibName:nil bundle:nil];
 			break;
 		}
 
-		case 3:
+		case 3 :
 		{
 			contentViewController = [[Pie4ViewController alloc] initWithNibName:nil bundle:nil];
 			break;
 		}
 
-		case 4:
+		case 4 :
 		{
 			contentViewController = [[Pie5ViewController alloc] initWithNibName:nil bundle:nil];
 			break;
 		}
 
-		case 5:
+		case 5 :
 		{
 			contentViewController = [[Pie6ViewController alloc] initWithNibName:nil bundle:nil];
 			break;
 		}
 
-		case 6:
+		case 6 :
 		{
 			contentViewController = [[Pie7ViewController alloc] initWithNibName:nil bundle:nil];
 			break;
 		}
 
-		case 7:
+		case 7 :
 		{
 			contentViewController = [[Pie8ViewController alloc] initWithNibName:nil bundle:nil];
 			break;
 		}
 
-		case 8:
+		case 8 :
 		{
 			contentViewController = [[Pie9ViewController alloc] initWithNibName:nil bundle:nil];
 			break;
 		}
 
-		default:
+		default :
 			return;
 	}
 

@@ -25,10 +25,10 @@
 // 3 is the minimum value for the inner radius
 #define INNER_RADIUS_MIN_VALUE 3.
 
-#define FONT_SIZE 15.
-#define X_OFFSET_TEXT 12.
-#define Y_OFFSET_TEXT 2.
-#define TOUCH_DEPTH_VALUE 425.0f
+#define FONT_SIZE              15.
+#define X_OFFSET_TEXT          12.
+#define Y_OFFSET_TEXT          2.
+#define TOUCH_DEPTH_VALUE      425.0f
 
 @interface OTSliceView ()
 
@@ -56,8 +56,10 @@
 @synthesize shouldDisplayLegendInsideSlice;
 @synthesize titleViewIsInConflict;
 
-- (void)setInnerRadius:(CGFloat)newInnerRadius {
-	if (newInnerRadius >= INNER_RADIUS_MIN_VALUE) {
+- (void)setInnerRadius:(CGFloat)newInnerRadius
+{
+	if (newInnerRadius >= INNER_RADIUS_MIN_VALUE)
+	{
 		innerRadius = newInnerRadius;
 	}
 }
@@ -65,9 +67,11 @@
 /**************************************************************************************************/
 #pragma mark - Birth
 
-- (id)init {
+- (id)init
+{
 	self = [super init];
-	if (self) {
+	if (self)
+	{
 		shouldDisplayLegendInsideSlice = DISPLAY_LEGEND_INSIDE_SLICE;
 		innerRadius = INNER_RADIUS_MIN_VALUE;
 	}
@@ -77,7 +81,8 @@
 /**************************************************************************/
 #pragma mark - manage animation pie chart
 
-- (void)drawInContext:(CGContextRef)context {
+- (void)drawInContext:(CGContextRef)context
+{
 	CGMutablePathRef path = CGPathCreateMutable();
 	CGPoint center = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds));
 
@@ -96,10 +101,12 @@
 	angle4 -= alpha1;
 
 	CGFloat midAngle = startAngle + sliceAngle / 2;
-	if (angle4 < angle1) {
+	if (angle4 < angle1)
+	{
 		angle1 = angle4 = startAngle + sliceAngle / 2;
 	}
-	if (angle3 < angle2) {
+	if (angle3 < angle2)
+	{
 		angle2 = angle3 = startAngle + sliceAngle / 2;
 	}
 
@@ -137,12 +144,13 @@
 	CGContextClip(context);
 
 
-	if (self.shouldDisplayGradient) {
+	if (self.shouldDisplayGradient)
+	{
 		CGColorSpaceRef space = CGColorSpaceCreateDeviceRGB();
 		const CGFloat *gradientColor = CGColorGetComponents(sliceColor.CGColor);
 
-		CGFloat components[8] = { gradientColor[0], gradientColor[1], gradientColor[2], gradientColor[3],
-			                      gradientColor[0] - 0.2, gradientColor[1] - 0.2, gradientColor[2] - 0.2, gradientColor[3] };
+		CGFloat components[8] = { gradientColor[0],       gradientColor[1],       gradientColor[2],       gradientColor[3],
+								  gradientColor[0] - 0.2, gradientColor[1] - 0.2, gradientColor[2] - 0.2, gradientColor[3] };
 		CGFloat locations[2] = { 0.0, 1.0 };
 		CGGradientRef gradient = CGGradientCreateWithColorComponents(space, components, locations, 2);
 
@@ -156,7 +164,8 @@
 	CGContextRestoreGState(context);
 
 	// Legend in slice
-	if (title && shouldDisplayLegendInsideSlice) {
+	if (title && shouldDisplayLegendInsideSlice)
+	{
 		CGContextSelectFont(context, "Helvetica-Bold", FONT_SIZE, kCGEncodingMacRoman);
 		CGContextSetFillColorWithColor(context, [UIColor whiteColor].CGColor);
 		CGAffineTransform transform = CGAffineTransformMake(1, 0, 0, -1, 0, 0);
@@ -172,7 +181,8 @@
 /**************************************************************************/
 #pragma mark - manage animation pie chart
 
-- (void)movetoDepth:(CGFloat)depth {
+- (void)movetoDepth:(CGFloat)depth
+{
 	CATransform3D transform = CATransform3DIdentity;
 
 	transform.m34 = 1.0 / -2000;
@@ -182,12 +192,15 @@
 	[self setValue:value forKeyPath:@"transform.translation.z"];
 }
 
-- (void)movetoFront {
+- (void)movetoFront
+{
 	[self movetoDepth:TOUCH_DEPTH_VALUE];
 }
 
-- (void)bringToBackIfSelected {
-	if (self.isSelected) {
+- (void)bringToBackIfSelected
+{
+	if (self.isSelected)
+	{
 		[self movetoDepth:0.0f];
 		self.isSelected = NO;
 	}
@@ -200,7 +213,8 @@
  * This method return the dot on the Top of the slice, at the midAngle. Most of the time, we use this method to place
  * the legend outside of the Slice. We can give an offset if we want.
  */
-- (CGPoint)computeTopOfSliceDotWithOffset:(CGFloat)offset {
+- (CGPoint)computeTopOfSliceDotWithOffset:(CGFloat)offset
+{
 	CGPoint center = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds));
 	CGFloat midAngle = [self retrieveAngleOfSlice];
 
@@ -210,7 +224,8 @@
 	return CGPointMake(xText, yText);
 }
 
-- (CGFloat)retrieveAngleOfSlice {
+- (CGFloat)retrieveAngleOfSlice
+{
 	CGFloat midAngle = startAngle + sliceAngle / 2;
 
 	return midAngle;
@@ -219,12 +234,13 @@
 /**************************************************************************************************/
 #pragma mark - Description
 
-- (NSString *)description {
+- (NSString *)description
+{
 	return [NSString stringWithFormat:@"%@ conflict : %d  title label : %@ slice angle : %f",
-	        self.title,
-	        titleViewIsInConflict,
-	        titleView,
-	        sliceAngle];
+			self.title,
+			titleViewIsInConflict,
+			titleView,
+			sliceAngle];
 }
 
 /**************************************************************************************************/
@@ -233,10 +249,12 @@
 /**
  * This method sort the givenList of OTSliceView from the minimum slice angle, to the maximum.
  */
-+ (NSArray *)sortSliceLayerListBySliceAngle:(NSArray *)givenList {
++ (NSArray *)sortSliceLayerListBySliceAngle:(NSArray *)givenList
+{
 	NSArray *result = nil;
 
-	if ([givenList isKindOfClass:[NSArray class]] && givenList.count > 0) {
+	if ([givenList isKindOfClass:[NSArray class]] && givenList.count > 0)
+	{
 		result = [givenList sortedArrayUsingSelector:@selector(compareByAngle:)];
 	}
 
@@ -246,13 +264,17 @@
 /**
  * This method retrieve a SliceView with the minimum slice angle with a title in conflict of the given list
  */
-+ (OTSliceView *)retrieveSliceViewWithSmallestSliceAngleFromList:(NSArray *)givenList {
++ (OTSliceView *)retrieveSliceViewWithSmallestSliceAngleFromList:(NSArray *)givenList
+{
 	OTSliceView *result = nil;
 	CGFloat min = MAXFLOAT;
 
-	if ([givenList isKindOfClass:[NSArray class]] && givenList.count > 0) {
-		for (OTSliceView *slice in givenList) {
-			if (min > slice.sliceAngle && slice.titleViewIsInConflict) {
+	if ([givenList isKindOfClass:[NSArray class]] && givenList.count > 0)
+	{
+		for (OTSliceView *slice in givenList)
+		{
+			if (min > slice.sliceAngle && slice.titleViewIsInConflict)
+			{
 				min = slice.sliceAngle;
 				result = slice;
 			}
@@ -264,7 +286,8 @@
 /**************************************************************************************************/
 #pragma mark - Compare
 
-- (NSComparisonResult)compareByAngle:(OTSliceView *)sliceToCompare {
+- (NSComparisonResult)compareByAngle:(OTSliceView *)sliceToCompare
+{
 	NSNumber *selfNumber = [NSNumber numberWithFloat:self.sliceAngle];
 	NSNumber *numberToCompare = [NSNumber numberWithFloat:sliceToCompare.sliceAngle];
 

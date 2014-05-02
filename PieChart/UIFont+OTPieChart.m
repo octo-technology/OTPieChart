@@ -22,14 +22,14 @@
 
 #import "UIFont+OTPieChart.h"
 
-static NSString * const kFontName = @"HelveticaNeue-CondensedBold";
+static NSString *const kFontName = @"HelveticaNeue-CondensedBold";
 static const CGFloat kFontSize = 12.;
 
-@implementation UIFont(OTPieChart)
+@implementation UIFont (OTPieChart)
 
 + (UIFont *)defaultFont
 {
-    return [UIFont fontWithName:kFontName size:kFontSize];
+	return [UIFont fontWithName:kFontName size:kFontSize];
 }
 
 @end

@@ -30,13 +30,13 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+	self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
-    MainViewController *vc = [[MainViewController alloc] initWithNibName:nil bundle:nil];
-    window.rootViewController = vc;
-    window.backgroundColor = [UIColor whiteColor];
-    [window makeKeyAndVisible];
-    return YES;
+	MainViewController *vc = [[MainViewController alloc] initWithNibName:nil bundle:nil];
+	window.rootViewController = vc;
+	window.backgroundColor = [UIColor whiteColor];
+	[window makeKeyAndVisible];
+	return YES;
 }
 
 @end

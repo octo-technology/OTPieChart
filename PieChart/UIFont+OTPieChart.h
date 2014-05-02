@@ -26,7 +26,7 @@
  * UIFont+OTPieChart category
  */
 
-@interface UIFont(OTPieChart)
+@interface UIFont (OTPieChart)
 
 /** Default font used by OTPieChart
  * @return Default UIFont.
