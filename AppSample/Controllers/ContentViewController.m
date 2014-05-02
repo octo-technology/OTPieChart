@@ -38,29 +38,25 @@
 /**************************************************************************************************/
 #pragma mark - View Management
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
 	[super viewDidLoad];
 
 	self.slices = [[NSMutableArray alloc] init];
 
-	for (int i = 0; i < self.values.count; i++)
-	{
+	for (int i = 0; i < self.values.count; i++) {
 		CGFloat value = [[self.values objectAtIndex:i] floatValue];
 		UIColor *color = [self.colors objectAtIndex:i];
 
 		NSString *label = nil;
 
-		if (!labels)
-		{
+		if (!self.labels) {
 			label = [NSString stringWithFormat:@"Value : %.2f %%", value * 100];
 		}
-		else
-		{
-			label = [labels objectAtIndex:i];
+		else {
+			label = [self.labels objectAtIndex:i];
 		}
 		OTSlice *slice = [[OTSlice alloc] initWithLabel:label percentageValue:value color:color];
-		[slices addObject:slice];
+		[self.slices addObject:slice];
 	}
 
 	self.pie = [[OTPieChartView alloc] initWithFrame:self.view.frame];
@@ -74,62 +70,58 @@
 	[self.pie loadPieChart];
 }
 
-- (void)viewDidUnload
-{
+- (void)viewDidUnload {
 	[super viewDidUnload];
 }
 
 /**************************************************************************************************/
 #pragma mark - OTPieChartDatasource
 
-- (NSUInteger)numbertOfSliceForPieChartIndex:(OTPieChartView *)thePieChart
-{
-	return slices.count;
+- (NSUInteger)numbertOfSliceForPieChartIndex:(OTPieChartView *)thePieChart {
+	return self.slices.count;
 }
 
-- (CGFloat)pieChart:(OTPieChartView *)thePieChart getPercentageValue:(NSUInteger)pieChartIndex
-{
-	if ([slices count] > pieChartIndex)
-	{
-		OTSlice *slice = [slices objectAtIndex:pieChartIndex];
+- (CGFloat)pieChart:(OTPieChartView *)thePieChart getPercentageValue:(NSUInteger)pieChartIndex {
+	if ([slices count] > pieChartIndex) {
+		OTSlice *slice = [self.slices objectAtIndex:pieChartIndex];
 		return slice.percentageValue;
 	}
-	else
-	{
+	else {
 		return 0.0;
 	}
 }
 
-- (UIColor *)pieChart:(OTPieChartView *)thePieChart getSliceColor:(NSUInteger)pieChartIndex
-{
-	if ([slices count] > pieChartIndex)
-	{
-		OTSlice *slice = [slices objectAtIndex:pieChartIndex];
+- (UIColor *)pieChart:(OTPieChartView *)thePieChart getSliceColor:(NSUInteger)pieChartIndex {
+	if ([slices count] > pieChartIndex) {
+		OTSlice *slice = [self.slices objectAtIndex:pieChartIndex];
 		return slice.color;
 	}
-	else
-	{
+	else {
 		return nil;
 	}
 }
-- (NSString *)pieChart:(OTPieChartView *)thePieChart getSliceLabel:(NSUInteger)pieChartIndex
-{
-	OTSlice *slice = [slices objectAtIndex:pieChartIndex];
+
+- (NSString *)pieChart:(OTPieChartView *)thePieChart getSliceLabel:(NSUInteger)pieChartIndex {
+	OTSlice *slice = [self.slices objectAtIndex:pieChartIndex];
 
 	return slice.title;
+}
+
+- (UIView *)pieChart:(OTPieChartView *)thePieChart getView:(NSUInteger)pieChartIndex {
+	OTSlice *slice = [self.slices objectAtIndex:pieChartIndex];
+
+	return slice.view;
 }
 
 /**************************************************************************************************/
 #pragma mark - OTPieChartDelegate
 
-- (CGFloat)outerRadiusForPieChart:(OTPieChartView *)thePieChart
-{
+- (CGFloat)outerRadiusForPieChart:(OTPieChartView *)thePieChart {
 	return 200.;
 }
 
-- (void)pieChart:(OTPieChartView *)thePieChart didSelectSliceAtIndex:(NSUInteger)pieChartIndex
-{
-	DLog(@"pie clicked : %d", pieChartIndex);
+- (void)pieChart:(OTPieChartView *)thePieChart didSelectSliceAtIndex:(NSUInteger)pieChartIndex {
+	DLog(@"pie clicked : %lu", (unsigned long)pieChartIndex);
 }
 
 @end

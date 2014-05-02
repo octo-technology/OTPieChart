@@ -28,19 +28,21 @@
 @interface OTSlice : NSObject
 
 /**************************************************************************/
-#pragma mark - Getters and Setters 
+#pragma mark - Getters and Setters
 
 /** @name Properties */
 
 /** Slice title */
-@property (nonatomic, strong) NSString  *title;
+@property (nonatomic, strong) NSString *title;
 /** Value related to the slice in percent.
  *
  * Authorized: 0.0 < value < 1.0.
  */
-@property (nonatomic, assign) CGFloat   percentageValue;
+@property (nonatomic, assign) CGFloat percentageValue;
 /** Color used to display the slice. */
-@property (nonatomic, strong) UIColor   *color;
+@property (nonatomic, strong) UIColor *color;
+/** Custom view */
+@property (nonatomic, strong) UIView *view;
 
 /**************************************************************************/
 #pragma mark - Birth
@@ -53,8 +55,8 @@
  * @param percentageValue Percent associated to the slice.
  * @param color Color of the slice.
  */
-- (id)initWithLabel:(NSString *)label 
-    percentageValue:(CGFloat)percentageValue 
-              color:(UIColor *)color; 
+- (id)initWithLabel:(NSString *)label
+    percentageValue:(CGFloat)percentageValue
+              color:(UIColor *)color;
 
 @end

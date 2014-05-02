@@ -32,7 +32,7 @@
 /**
  * Protocol called by the PieChartView to retrieve display infos about the PieChart display and alert of events.
  */
-@protocol OTPieChartDelegate<NSObject>
+@protocol OTPieChartDelegate <NSObject>
 
 @optional
 
@@ -80,7 +80,7 @@
 /**
  * Protocol called by the PieChartView to retrieve data infos about the PieChart.
  */
-@protocol OTPieChartDataSource<NSObject>
+@protocol OTPieChartDataSource <NSObject>
 
 @required
 
@@ -105,6 +105,7 @@
  * Asks the datasource the legend to display of the given slice index.
  */
 - (NSString *)pieChart:(OTPieChartView *)thePieChart getSliceLabel:(NSUInteger)pieChartIndex;
+- (UIView *)pieChart:(OTPieChartView *)thePieChart getView:(NSUInteger)pieChartIndex;
 
 @end
 
@@ -119,9 +120,9 @@
 /** @name Properties */
 
 /** Delegate of the the PieChart view. */
-@property (nonatomic, assign) id<OTPieChartDelegate>    delegate;
+@property (nonatomic, assign) id <OTPieChartDelegate> delegate;
 /** Datasource fo the PieChart view. */
-@property (nonatomic, assign) id<OTPieChartDataSource>  datasource;
+@property (nonatomic, assign) id <OTPieChartDataSource> datasource;
 /** Array of OTSlice object. */
 @property (nonatomic, strong) NSMutableArray *sliceLayerList;
 

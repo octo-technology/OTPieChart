@@ -35,7 +35,6 @@
 		93E00A28159C9489000EF021 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 93E00A26159C9489000EF021 /* InfoPlist.strings */; };
 		93E00A2A159C9489000EF021 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E00A29159C9489000EF021 /* main.m */; };
 		93E00A2E159C9489000EF021 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E00A2D159C9489000EF021 /* AppDelegate.m */; };
-		93E00A36159C9489000EF021 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93E00A35159C9489000EF021 /* SenTestingKit.framework */; };
 		93E00A37159C9489000EF021 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93E00A1D159C9489000EF021 /* UIKit.framework */; };
 		93E00A38159C9489000EF021 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93E00A1F159C9489000EF021 /* Foundation.framework */; };
 /* End PBXBuildFile section */
@@ -99,8 +98,7 @@
 		93E00A2B159C9489000EF021 /* OTPieChart-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OTPieChart-Prefix.pch"; sourceTree = "<group>"; };
 		93E00A2C159C9489000EF021 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		93E00A2D159C9489000EF021 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		93E00A34159C9489000EF021 /* OTPieChartTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OTPieChartTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
-		93E00A35159C9489000EF021 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		93E00A34159C9489000EF021 /* OTPieChartTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OTPieChartTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,7 +119,6 @@
 			files = (
 				9345C914166511F80096BDA8 /* QuartzCore.framework in Frameworks */,
 				9345C913166511ED0096BDA8 /* CoreGraphics.framework in Frameworks */,
-				93E00A36159C9489000EF021 /* SenTestingKit.framework in Frameworks */,
 				93E00A37159C9489000EF021 /* UIKit.framework in Frameworks */,
 				93E00A38159C9489000EF021 /* Foundation.framework in Frameworks */,
 			);
@@ -201,7 +198,7 @@
 			isa = PBXGroup;
 			children = (
 				93E00A19159C9489000EF021 /* OTPieChart.app */,
-				93E00A34159C9489000EF021 /* OTPieChartTests.octest */,
+				93E00A34159C9489000EF021 /* OTPieChartTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -213,7 +210,6 @@
 				93E00A1D159C9489000EF021 /* UIKit.framework */,
 				93E00A1F159C9489000EF021 /* Foundation.framework */,
 				93E00A21159C9489000EF021 /* CoreGraphics.framework */,
-				93E00A35159C9489000EF021 /* SenTestingKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -298,8 +294,8 @@
 			);
 			name = OTPieChartTests;
 			productName = pieChartKTTests;
-			productReference = 93E00A34159C9489000EF021 /* OTPieChartTests.octest */;
-			productType = "com.apple.product-type.bundle";
+			productReference = 93E00A34159C9489000EF021 /* OTPieChartTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -505,36 +501,28 @@
 		93E00A4A159C9489000EF021 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/OTPieChart.app/OTPieChart";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+					"$(inherited)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AppSample/OTPieChart-Prefix.pch";
 				INFOPLIST_FILE = "pieChartTests/OTPieChartTests-Info.plist";
 				PRODUCT_NAME = OTPieChartTests;
-				TEST_AFTER_BUILD = YES;
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
 			};
 			name = Debug;
 		};
 		93E00A4B159C9489000EF021 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/OTPieChart.app/OTPieChart";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+					"$(inherited)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AppSample/OTPieChart-Prefix.pch";
 				INFOPLIST_FILE = "pieChartTests/OTPieChartTests-Info.plist";
 				PRODUCT_NAME = OTPieChartTests;
-				TEST_AFTER_BUILD = YES;
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
 			};
 			name = Release;
 		};
